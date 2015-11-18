@@ -112,9 +112,8 @@
 
     $index = 0;
     foreach ($folders as $path) {
-        $extension = pathinfo($path, PATHINFO_EXTENSION);
-        if(in_array($extension, array("jpg", "JPG", "jpeg", "JPEG", "png", "PNG"))) {
-            $fullpath = $dir.'/'.$path;
+        $fullpath = $dir.'/'.$path;
+        if(is_array(getimagesize($fullpath)) && exif_imagetype($fullpath) != IMAGETYPE_PSD) {
             echo '<a href="'.$fullpath.'"><img src="'.$fullpath.'"></a><br><br>';
             $index++;
         }
