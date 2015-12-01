@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Galleria :: localhost</title>
+    <title>Galleria</title>
 
     <link href='https://fonts.googleapis.com/css?family=Exo:300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
@@ -47,74 +47,58 @@
 
 </style>
 
-<nav id="breads">
-    <ol id="" class="breadcrumb">
-        <?php
-        error_reporting(0);
-        $path = $_GET["path"];
-        if($path == "") {
-            $path = ".";
+<?php
+
+error_reporting(0);
+
+$path = $_GET["path"];
+if($path == "") {
+    $path = ".";
+}
+
+function renderCrumbs($dir) {
+    $crumbs = explode(DIRECTORY_SEPARATOR, $dir);
+    foreach($crumbs as $key => $value) {
+        if($value == ".") {
+            $name = "localhost";
+        } else {
+            $name = $value;
         }
-        $crumbs = explode("/", $path);
-        $folder_path = array();
-        foreach($crumbs as $folder_name) {
-            if($folder_name == ".") {
-                $name = "localhost";
-            } else {
-                $name = $folder_name;
-            }
-            array_push($folder_path, $folder_name);
-            echo '<li><a href="?path='.implode("/", $folder_path).'">'.$name.'</a></li>';
+        $folder_path = implode(DIRECTORY_SEPARATOR, array_slice($crumbs, 0, $key + 1));
+        if($key + 1 < count($crumbs)) {
+            echo '<li><a href="?path='.$folder_path.'">'.$name.'</a></li>';
+        } else {
+            echo '<li>'.$name.'</li>';
         }
-        ?>
-    </ol>
-</nav>
+    }
+}
 
-<div id="folder" class="col-md-3">
-    <ul class="list-group">
-        <?php
-        $path = $_GET["path"];
-        if($path == "") {
-            $path = ".";
-        }
-
-        function getDirContents($dir) {
-            $files = scandir($dir);
-            if($dir != ".") {
-                $crumbs = explode("/", $dir);
-                array_pop($crumbs);
-                echo '<li class="list-group-item"><a href="?path=' . implode("/", $crumbs) . '">Go up &uparrow;</a></li>';
-            }
-
-            foreach($files as $key => $value){
-                $path = realpath($dir.DIRECTORY_SEPARATOR.$value);
-                $exclude_array = array(".", "..", ".idea", ".git");
-                if(is_dir($path) && !in_array($value, $exclude_array)) {
-                    $filepath = $dir.DIRECTORY_SEPARATOR.$value;
-                    echo '<li class="list-group-item"><a href="?path='.$filepath.'">'.$value.'</a></li>';
-                }
-            }
-        }
-
-        getDirContents($path);
-        ?>
-    </ul>
-</div>
-
-<div id="gallery" class="col-md-9 col-md-offset-3">
-    <?php
-    $dir = $_GET['path'];
-    if($dir == '') {
-        $dir = '.';
+function renderFolders($dir) {
+    $files = scandir($dir);
+    if($dir != ".") {
+        $up_path = substr($dir, 0, strrpos($dir, '/'));
+        echo '<li class="list-group-item"><a href="?path='.$up_path.'">Go up &uparrow;</a></li>';
     }
 
-    $folders = scandir($dir);
+    $exclude_array = array(".", "..", ".DS_Store", ".idea", ".git");
+    foreach($files as $file_name){
+        if(!in_array($file_name, $exclude_array)) {
+            $real_path = realpath($dir.DIRECTORY_SEPARATOR.$file_name);
+            if(is_dir($real_path)) {
+                $folder_path = $dir.DIRECTORY_SEPARATOR.$file_name;
+                echo '<li class="list-group-item"><a href="?path='.$folder_path.'">'.$file_name.'</a></li>';
+            }
+        }
+    }
+}
 
+function renderImages($dir) {
+    $files = scandir($dir);
     $index = 0;
-    foreach ($folders as $path) {
-        $fullpath = $dir.'/'.$path;
-        if(is_array(getimagesize($fullpath)) && exif_imagetype($fullpath) != IMAGETYPE_PSD) {
-            echo '<a href="'.$fullpath.'"><img src="'.$fullpath.'"></a><br><br>';
+    foreach ($files as $file_name) {
+        $full_path = $dir.DIRECTORY_SEPARATOR.$file_name;
+        if(is_array(getimagesize($full_path)) && exif_imagetype($full_path) != IMAGETYPE_PSD) {
+            echo '<a href="'.$full_path.'"><img src="'.$full_path.'"></a><br><br>';
             $index++;
         }
     }
@@ -122,7 +106,24 @@
     if($index == 0) {
         echo 'No items to view!';
     }
-    ?>
+}
+
+?>
+
+<nav id="breads">
+    <ol id="" class="breadcrumb">
+        <?php renderCrumbs($path); ?>
+    </ol>
+</nav>
+
+<div id="folder" class="col-md-3">
+    <ul class="list-group">
+        <?php renderFolders($path); ?>
+    </ul>
+</div>
+
+<div id="gallery" class="col-md-9 col-md-offset-3">
+    <?php renderImages($path); ?>
 </div>
 
 </body>
