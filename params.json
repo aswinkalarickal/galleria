@@ -1,6 +1,6 @@
 {
   "name": "Galleria",
   "tagline": "Simple image gallery",
-  "body": "#Galleria\r\n\r\nSimple image gallery\r\n\r\nAll you have to do is to copy the index.php file to the root folder of your server, and your gallery is ready!\r\n\r\n>**Note:**\r\n>In order to make the app single-paged, some files are being fetched from remote servers.\r\n>So it requires an internet connection to function properly.\r\n>The app makes use of [Bootstrap](http://getbootstrap.com/) and [Google Fonts](https://www.google.com/fonts)\r\n\r\n####Version 1.0\r\n- First major release\r\n- Cleaner code\r\n\r\n####Version 0.0.3\r\n- Added support for more types of images (ICO, GIF, etc)\r\n\r\n####Version 0.0.2\r\n- Removed tree structured and introduced \"open one folder at a time\" system\r\n- Changed UI\r\n\r\n####Version 0.0.1\r\n- Tree structured\r\n- List out all folders every time\r\n- Show images with extensions JPG, JPEG and PNG",
+  "body": "#Galleria\r\n\r\n**Demo:** [http://www.aswink.in/demo/galleria/](http://www.aswink.in/demo/galleria/)\r\n\r\nGalleria is a simple image gallery. To use it download a copy of index.php file to the root folder of your server, and your are ready togo!\r\n\r\n>**Note:**\r\n>In order to make the app single-paged, some files are being fetched from remote servers.\r\n>So it requires an internet connection to function properly.\r\n>The app makes use of [Bootstrap](http://getbootstrap.com/) and [Google Fonts](https://www.google.com/fonts)\r\n",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
