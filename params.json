@@ -1,6 +1,6 @@
 {
   "name": "Galleria",
   "tagline": "Simple image gallery",
-  "body": "#Galleria\r\n\r\n**Demo:** [http://www.aswink.in/demo/galleria/](http://www.aswink.in/demo/galleria/)\r\n\r\nGalleria is a simple image gallery. To use it download a copy of index.php file to the root folder of your server, and your are ready togo!\r\n\r\n>**Note:**\r\n>In order to make the app single-paged, some files are being fetched from remote servers.\r\n>So it requires an internet connection to function properly.\r\n>The app makes use of [Bootstrap](http://getbootstrap.com/) and [Google Fonts](https://www.google.com/fonts)\r\n",
+  "body": "#Galleria\r\n\r\n**Demo:** [http://www.aswink.in/demo/galleria/](http://www.aswink.in/demo/galleria/)\r\n\r\nGalleria is a simple image gallery. To use it download a copy of *index.php* file to the root folder of your server, and your are ready togo!\r\n\r\n>**Note:**\r\n>In order to make the app single-paged, some files are being fetched from remote servers.\r\n>So it requires an internet connection to function properly.\r\n>The app makes use of [Bootstrap](http://getbootstrap.com/) and [Google Fonts](https://www.google.com/fonts)\r\n",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
