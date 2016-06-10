@@ -1,26 +1,22 @@
-#Galleria
+[<img src="http://cdn.aswink.in/content/img/galleria.jpg" alt="React virtualized" data-canonical-src="http://cdn.aswink.in/content/img/galleria.jpg" width="300" height="110" />](http://aswinkalarickal.github.io/galleria/)
 
-Simple image gallery
+**Simple image gallery**
 
-All you have to do is to copy the index.php file to the root folder of your server, and your gallery is ready!
+**Demo:** [http://www.aswink.in/demo/galleria/](http://www.aswink.in/demo/galleria/)
+
+Getting started
+---------------
+Download a copy of `index.php` to the root folder of your server, and you are ready to go!
 
 >**Note:**
 >In order to make the app single-paged, some files are being fetched from remote servers.
 >So it requires an internet connection to function properly.
->The app makes use of [Bootstrap](http://getbootstrap.com/) and [Google Fonts](https://www.google.com/fonts)
+>The app makes use of [Bootstrap](http://getbootstrap.com/) and [Google Fonts](https://www.google.com/fonts).
 
-####Version 1.0
-- First major release
-- Cleaner code
+Changelog
+---------
+Changes are tracked in the [changelog](https://github.com/aswinkalarickal/galleria/blob/master/CHANGELOG.md).
 
-####Version 0.0.3
-- Added support for more types of images (ICO, GIF, etc)
-
-####Version 0.0.2
-- Removed tree structured and introduced "open one folder at a time" system
-- Changed UI
-
-####Version 0.0.1
-- Tree structured
-- List out all folders every time
-- Show images with extensions JPG, JPEG and PNG
+License
+-------
+*galleria* is available under the [MIT License](https://github.com/aswinkalarickal/galleria/blob/master/LICENSE.md).
