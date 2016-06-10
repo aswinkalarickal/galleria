@@ -39,6 +39,15 @@
 
     }
 
+    #folder ul.list-group>li {
+        padding: 0;
+    }
+    
+    #folder ul.list-group>li a {
+        display: block;
+        padding: 10px 15px;
+    }
+
     #gallery img {
         max-width: 100%;
         width: auto;

@@ -4,8 +4,7 @@
 
 **Demo:** [http://www.aswink.in/demo/galleria/](http://www.aswink.in/demo/galleria/)
 
-Getting started
----------------
+## Getting started
 Download a copy of `index.php` to the root folder of your server, and you are ready to go!
 
 >**Note:**
@@ -13,10 +12,8 @@ Download a copy of `index.php` to the root folder of your server, and you are re
 >So it requires an internet connection to function properly.
 >The app makes use of [Bootstrap](http://getbootstrap.com/) and [Google Fonts](https://www.google.com/fonts).
 
-Changelog
----------
+## Changelog
 Changes are tracked in the [changelog](https://github.com/aswinkalarickal/galleria/blob/master/CHANGELOG.md).
 
-License
--------
+## License
 *galleria* is available under the [MIT License](https://github.com/aswinkalarickal/galleria/blob/master/LICENSE.md).
