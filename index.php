@@ -54,6 +54,12 @@
         height: auto;
     }
 
+    #gallery .filename {
+        border: 1px solid #dddddd;
+        padding: 10px 15px;
+        margin-bottom: 20px;
+    }
+
 </style>
 
 <?php
@@ -106,8 +112,13 @@ function renderImages($dir) {
     $index = 0;
     foreach ($files as $file_name) {
         $full_path = $dir.DIRECTORY_SEPARATOR.$file_name;
-        if(is_array(getimagesize($full_path)) && exif_imagetype($full_path) != IMAGETYPE_PSD) {
-            echo '<a href="'.$full_path.'"><img src="'.$full_path.'"></a><br><br>';
+        if(is_array(getimagesize($full_path))) {
+            if(exif_imagetype($full_path) == IMAGETYPE_PSD) {
+                $file_name_parts = explode(DIRECTORY_SEPARATOR, $full_path);
+                echo '<a href="'.$full_path.'" class="filename col-xs-12">'.end($file_name_parts).'</a><br><br>';
+            } else {
+                echo '<a href="'.$full_path.'"><img src="'.$full_path.'"></a><br><br>';
+            }
             $index++;
         }
     }
