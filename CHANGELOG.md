@@ -1,5 +1,8 @@
 ## Changelog
 
+#### 1.0.2
+* Added support to show filename of PSD files
+
 #### 1.0.1
 * Minor changes
 
