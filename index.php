@@ -7,6 +7,7 @@
 
     <link href='https://fonts.googleapis.com/css?family=Exo:300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -48,16 +49,53 @@
         padding: 10px 15px;
     }
 
-    #gallery img {
-        max-width: 100%;
-        width: auto;
-        height: auto;
+    #gallery #settings {
+        margin-bottom: 10px;
+        text-align: right;
     }
 
-    #gallery .filename {
-        border: 1px solid #dddddd;
-        padding: 10px 15px;
-        margin-bottom: 20px;
+    #gallery #images {
+        margin-top: 40px;
+    }
+
+    #gallery #images .image {
+        margin-bottom: 15px;
+    }
+
+    #gallery #images .image img {
+        height: auto;
+        width: auto;
+        max-width: 100%;
+    }
+
+    #gallery #images a.col-md-4 .image {
+        height: 150px;
+        background-size: cover;
+        margin-bottom: 30px;
+        overflow: hidden;
+    }
+
+    #gallery #images a.col-md-4 .image.filename {
+        padding: 15px;
+        background-color: #f0f0f0;
+    }
+    
+    @media (max-width: 991px) {
+
+        #gallery #settings {
+            display: none;
+        }
+
+        #gallery #images {
+            margin-top: 0;
+        }
+
+        #gallery #images a.col-md-4 .image {
+            height: auto;
+            overflow: auto;
+            margin-bottom: 0px;
+        }
+
     }
 
 </style>
@@ -115,9 +153,17 @@ function renderImages($dir) {
         if(is_array(getimagesize($full_path))) {
             if(exif_imagetype($full_path) == IMAGETYPE_PSD) {
                 $file_name_parts = explode(DIRECTORY_SEPARATOR, $full_path);
-                echo '<a href="'.$full_path.'" class="filename col-xs-12">'.end($file_name_parts).'</a><br><br>';
+                echo '<a href="'.$full_path.'" class="col-md-4">
+                        <div class="image filename">
+                            <i class="fa fa-file-image-o" aria-hidden="true"></i> '.end($file_name_parts).'
+                        </div>
+                    </a>';
             } else {
-                echo '<a href="'.$full_path.'"><img src="'.$full_path.'"></a><br><br>';
+                echo '<a href="'.$full_path.'" class="col-md-4">
+                        <div class="image">
+                            <img src="'.$full_path.'">
+                        </div>
+                    </a>';
             }
             $index++;
         }
@@ -143,8 +189,38 @@ function renderImages($dir) {
 </div>
 
 <div id="gallery" class="col-md-9 col-md-offset-3">
-    <?php renderImages($path); ?>
+    <div id="settings" class="col-md-12">
+        <div class="view-type col-md-3 col-md-offset-9">
+            <div class="btn-group" role="group">
+                <button type="button" id="setViewFullSize" class="btn btn-default set-view">
+                    <i class="fa fa-square" aria-hidden="true"></i>
+                </button>
+                <button type="button" id="setViewThumbnail" class="btn btn-default set-view">
+                    <i class="fa fa-th-large" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="images">
+        <?php renderImages($path); ?>
+    </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function() {
+
+        $('.set-view').on('click', function(e) {
+            if(this.id === 'setViewThumbnail') {
+                $('#gallery #images a').addClass('col-md-4');
+            } else {
+                $('#gallery #images a').removeClass('col-md-4');
+            }
+        });
+
+    });
+</script>
 
 </body>
 </html>
