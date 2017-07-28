@@ -54,30 +54,24 @@
         text-align: right;
     }
 
-    #gallery #images {
-        margin-top: 40px;
+    .grid {
+        margin-top: 50px;
     }
 
-    #gallery #images .image {
-        margin-bottom: 15px;
+    .grid .grid-item {
+        float: left;
+        width: 220px;
+        margin: 0 10px 10px 0;
     }
 
-    #gallery #images .image img {
-        height: auto;
-        width: auto;
-        max-width: 100%;
-    }
-
-    #gallery #images a.col-md-4 .image {
-        height: 150px;
-        background-size: cover;
-        margin-bottom: 30px;
-        overflow: hidden;
-    }
-
-    #gallery #images a.col-md-4 .image.filename {
+    .grid .grid-item.filename {
         padding: 15px;
         background-color: #f0f0f0;
+    }
+
+    .grid .grid-item img {
+        width: 100%;
+        height: auto;
     }
     
     @media (max-width: 991px) {
@@ -86,14 +80,8 @@
             display: none;
         }
 
-        #gallery #images {
-            margin-top: 0;
-        }
-
-        #gallery #images a.col-md-4 .image {
-            height: auto;
-            overflow: auto;
-            margin-bottom: 0px;
+        .grid .grid-item {
+            width: 100%;
         }
 
     }
@@ -153,14 +141,14 @@ function renderImages($dir) {
         if(is_array(getimagesize($full_path))) {
             if(exif_imagetype($full_path) == IMAGETYPE_PSD) {
                 $file_name_parts = explode(DIRECTORY_SEPARATOR, $full_path);
-                echo '<a href="'.$full_path.'" class="col-md-4">
-                        <div class="image filename">
-                            <i class="fa fa-file-image-o" aria-hidden="true"></i> '.end($file_name_parts).'
-                        </div>
-                    </a>';
+                echo '<a href="'.$full_path.'" class="grid-item">
+                    <div class="filename">
+                        <i class="fa fa-file-image-o" aria-hidden="true"></i> '.end($file_name_parts).'
+                    </div>
+                </a>';
             } else {
-                echo '<a href="'.$full_path.'" class="col-md-4">
-                        <div class="image">
+                echo '<a href="'.$full_path.'" class="grid-item">
+                        <div class="">
                             <img src="'.$full_path.'">
                         </div>
                     </a>';
@@ -201,25 +189,37 @@ function renderImages($dir) {
             </div>
         </div>
     </div>
-    <div id="images">
+    <div class="grid">
         <?php renderImages($path); ?>
     </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <script>
 
     $(document).ready(function() {
 
+        var applyMasonry = function() {
+            $('.grid').masonry({
+                itemSelector: '.grid-item'
+            });
+        };
+
+        applyMasonry();
+
         $('.set-view').on('click', function(e) {
             if(this.id === 'setViewThumbnail') {
-                $('#gallery #images a').addClass('col-md-4');
+                $('.grid-item').css('width', '220px');
+                applyMasonry();
             } else {
-                $('#gallery #images a').removeClass('col-md-4');
+                $('.grid-item').css('width', '100%');
+                applyMasonry();
             }
         });
 
     });
+    
 </script>
 
 </body>

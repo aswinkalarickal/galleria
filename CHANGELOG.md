@@ -1,5 +1,8 @@
 ## Changelog
 
+### 1.2.0
+* Added [Masonry](https://masonry.desandro.com/)
+
 ### 1.1.0
 * Added thumbnail support
 
