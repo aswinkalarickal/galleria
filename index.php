@@ -64,13 +64,14 @@
         margin: 0 10px 10px 0;
     }
 
-    .grid .grid-item.filename {
+    .grid .grid-item .filename {
         padding: 15px;
         background-color: #f0f0f0;
     }
 
     .grid .grid-item img {
         width: 100%;
+        max-width: 100%;
         height: auto;
     }
     
@@ -196,13 +197,19 @@ function renderImages($dir) {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 <script>
 
     $(document).ready(function() {
 
         var applyMasonry = function() {
-            $('.grid').masonry({
+            var $grid = $('.grid').masonry({
                 itemSelector: '.grid-item'
+            });
+
+            // layout Masonry after each image loads
+            $grid.imagesLoaded().progress( function() {
+                $grid.masonry('layout');
             });
         };
 
@@ -211,9 +218,11 @@ function renderImages($dir) {
         $('.set-view').on('click', function(e) {
             if(this.id === 'setViewThumbnail') {
                 $('.grid-item').css('width', '220px');
+                $('.grid-item img').css('width', '100%');
                 applyMasonry();
             } else {
                 $('.grid-item').css('width', '100%');
+                $('.grid-item img').css('width', 'auto');
                 applyMasonry();
             }
         });

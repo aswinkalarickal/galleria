@@ -1,5 +1,9 @@
 ## Changelog
 
+#### 1.2.1
+* Added [imagesLoaded](https://imagesloaded.desandro.com/)
+* Bug fixes
+
 ### 1.2.0
 * Added [Masonry](https://masonry.desandro.com/)
 
